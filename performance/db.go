@@ -10,7 +10,7 @@ import (
 
 func GetDb(name string, configPath string) *sql.DB {
 	config := loadConfig(configPath)
-	db, err := sql.Open("mysql", config.Username+":"+config.Password+"@tcp("+config.Hostname+":"+config.Port+")/"+name+"?charset=utf8")
+	db, err := sql.Open("mysql", config.Username+":"+config.Password+"@tcp("+config.Hostname+":"+config.Port+")/"+name+"?charset="+config.Charset)
 
 	if err != nil {
 		fmt.Println(err)
@@ -25,6 +25,7 @@ type Config struct {
 	Password string `json:"password:`
 	Hostname string `json:"hostname:`
 	Port     string `json:"port:`
+	Charset  string `json:"charset:`
 }
 
 func loadConfig(configPath string) *Config {
