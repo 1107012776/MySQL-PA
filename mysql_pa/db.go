@@ -27,18 +27,18 @@ type Config struct {
 	Port     string `json:"port:`
 }
 
-func loadConfig(configPath string) (c Config) {
+func loadConfig(configPath string) *Config {
 	//不同的配置规则，解析复杂度不同
 	f, err := ioutil.ReadFile(configPath)
 	if err != nil {
 		fmt.Println("load config error: ", err)
-		return
+		return nil
 	}
 	config := Config{}
 	err = json.Unmarshal(f, &config)
 	if err != nil {
 		fmt.Println("Para config failed: ", err)
-		return config
+		return &config
 	}
-	return config
+	return &config
 }
