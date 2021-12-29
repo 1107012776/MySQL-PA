@@ -1,4 +1,4 @@
-package mysqlPa
+package mysql
 
 import "fmt"
 

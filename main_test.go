@@ -1,8 +1,10 @@
 package main
 
-import "MySQL-PA/mysqlPa"
+import (
+	"MySQL-PA/mysql"
+)
 
 func main() {
-	p := mysqlPa.Explain{}
+	p := mysql.Explain{}
 	p.Analyze()
 }
