@@ -26,11 +26,10 @@ func Test_explain(t *testing.T) {
 	rows := p.SelectAll("show tables;")
 	var table string
 	for rows.Next() {
-		e := rows
+		e := rows.Scan(&table)
 		if e != nil {
-			//fmt.Println(e)
+			fmt.Println(e)
 		}
-		rows.Scan(&table)
 		fmt.Println(table)
 	}
 
