@@ -15,8 +15,6 @@ func (obj *Explain) Analyze() (b bool) {
 }
 
 func (obj *Explain) GetDb(name string, configPath string) (db *sql.DB) {
-	fmt.Println("getDb")
-	//return GetDb("phpshardingpdo1")
 	obj.Db = GetDb(name, configPath)
 	return obj.Db
 }
