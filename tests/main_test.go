@@ -1,18 +1,18 @@
 package tests
 
 import (
-	"MySQL-PA"
+	"MySQL-PA/mysql_pa"
 	assert "github.com/magiconair/properties/assert"
 	"testing"
 )
 
 func Test_Analyze(t *testing.T) {
-	p := MySQL_PA.Explain{}
+	p := mysql_pa.Explain{}
 	assert.Equal(t, p.Analyze(), true)
 }
 
 func Test_GetDb(t *testing.T) {
-	p := MySQL_PA.Explain{}
+	p := mysql_pa.Explain{}
 	db := p.GetDb("phpshardingpdo1")
 	assert.Equal(t, db != nil, true)
 }
