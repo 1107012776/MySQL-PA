@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_RootConfigDir(t *testing.T) {
+func Test_Analyze(t *testing.T) {
 	p := mysql.Explain{}
 	assert.Equal(t, p.Analyze(), true)
 }
