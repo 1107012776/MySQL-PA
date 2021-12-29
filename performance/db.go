@@ -1,4 +1,4 @@
-package mysql_pa
+package performance
 
 import (
 	"database/sql"

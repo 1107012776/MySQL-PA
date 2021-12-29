@@ -1,4 +1,4 @@
-module MySQL-PA
+module MySQL-Performance-Analysis
 
 go 1.17
 
