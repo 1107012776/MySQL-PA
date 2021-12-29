@@ -1,4 +1,4 @@
-package main
+package tests
 
 import (
 	"MySQL-PA/mysql_pa"
