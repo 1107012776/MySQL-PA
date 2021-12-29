@@ -16,5 +16,5 @@ func Test_GetDb(t *testing.T) {
 	p := performance.Explain{}
 	db := p.GetDb("phpshardingpdo1", "./config.json")
 	fmt.Println(db)
-	assert.Equal(t, db != nil, true)
+	assert.Equal(t, db.Ping() == nil, true)
 }
