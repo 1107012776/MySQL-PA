@@ -13,6 +13,6 @@ func Test_Analyze(t *testing.T) {
 
 func Test_GetDb(t *testing.T) {
 	p := mysql_pa.Explain{}
-	db := p.GetDb()
+	db := p.GetDb("phpshardingpdo1")
 	assert.Equal(t, db != nil, true)
 }

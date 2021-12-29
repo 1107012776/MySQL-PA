@@ -13,7 +13,8 @@ func (obj *Explain) Analyze() (b bool) {
 	return true
 }
 
-func (obj *Explain) GetDb() (db *sql.DB) {
+func (obj *Explain) GetDb(name string) (db *sql.DB) {
 	fmt.Println("getDb")
-	return GetDb("phpshardingpdo1")
+	//return GetDb("phpshardingpdo1")
+	return GetDb(name)
 }
