@@ -1,7 +1,8 @@
 package main
 
-import "fmt"
+import "MySQL-PA/mysqlPa"
 
 func main() {
-	fmt.Println("MySQL-PA")
+	p := mysqlPa.Explain{}
+	p.Analyze()
 }
