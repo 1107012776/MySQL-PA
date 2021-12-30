@@ -11,34 +11,43 @@ type Explain struct {
 }
 
 type ExplainEntity struct {
-	Id            sql.NullString `json:"id":`
-	Select_type   sql.NullString `json:"select_type":`
-	Table         sql.NullString `json:"table":`
-	Partitions    sql.NullString `json:"partitions":`
-	Type          sql.NullString `json:"type":`
-	Possible_keys sql.NullString `json:"possible_keys":`
-	Key           sql.NullString `json:"key":`
-	Key_len       sql.NullString `json:"key_len":`
-	Ref           sql.NullString `json:"ref":`
-	Rows          sql.NullString `json:"rows":`
-	Filtered      sql.NullString `json:"filtered":`
-	Extra         sql.NullString `json:"Extra":`
+	Id           sql.NullString `json:"id":`
+	SelectType   sql.NullString `json:"select_type":`
+	Table        sql.NullString `json:"table":`
+	Partitions   sql.NullString `json:"partitions":`
+	Type         sql.NullString `json:"type":`
+	PossibleKeys sql.NullString `json:"possible_keys":`
+	Key          sql.NullString `json:"key":`
+	KeyLen       sql.NullString `json:"key_len":`
+	Ref          sql.NullString `json:"ref":`
+	Rows         sql.NullString `json:"rows":`
+	Filtered     sql.NullString `json:"filtered":`
+	Extra        sql.NullString `json:"Extra":`
 }
 
-func (obj *Explain) Analyze(sql string) (en *ExplainEntity, s string, e error) {
+func (entity *ExplainEntity) ToJson() (string, error) {
+	jsonBytes, err := json.Marshal(entity)
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+	return string(jsonBytes), nil
+}
+
+func (obj *Explain) Analyze(sql string) (en *ExplainEntity, e error) {
 	rows := obj.SelectAll("explain " + sql)
 	defer rows.Close()
 	var entity ExplainEntity
 	for rows.Next() {
 		e := rows.Scan(
 			&entity.Id,
-			&entity.Select_type,
+			&entity.SelectType,
 			&entity.Table,
 			&entity.Partitions,
 			&entity.Type,
-			&entity.Possible_keys,
+			&entity.PossibleKeys,
 			&entity.Key,
-			&entity.Key_len,
+			&entity.KeyLen,
 			&entity.Ref,
 			&entity.Rows,
 			&entity.Filtered,
@@ -46,16 +55,11 @@ func (obj *Explain) Analyze(sql string) (en *ExplainEntity, s string, e error) {
 		)
 		if e != nil {
 			fmt.Println(e)
-			return nil, "", e
+			return nil, e
 		}
-		jsonBytes, err := json.Marshal(entity)
-		if err != nil {
-			fmt.Println(err)
-			return nil, "", err
-		}
-		return &entity, string(jsonBytes), nil
+		return &entity, nil
 	}
-	return nil, "", nil
+	return nil, nil
 }
 
 func (obj *Explain) GetDb(name string, configPath string) (db *sql.DB) {
