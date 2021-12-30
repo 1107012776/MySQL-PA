@@ -24,9 +24,12 @@ func Test_explain(t *testing.T) {
 	p := performance.Explain{}
 	p.GetDb("phpshardingpdo1", "./config.json")
 	rows := p.SelectAll("show tables;")
+	defer rows.Close()
 	var table string
 	for rows.Next() {
 		e := rows.Scan(&table)
+		columns, _ := rows.Columns()
+		fmt.Println(len(columns))
 		if e != nil {
 			fmt.Println(e)
 		}
