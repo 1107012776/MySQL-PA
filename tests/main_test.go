@@ -9,14 +9,14 @@ import (
 
 func Test_Analyze(t *testing.T) {
 	p := performance.Explain{}
-	p.GetDb("phpshardingpdo1", "./config.json")
+	p.Init("phpshardingpdo1", "./config.json")
 	_, err := p.Analyze("SELECT * from article_1 where article_title = '张三是某网络科技的呀';")
 	assert.Equal(t, err == nil, true)
 }
 
 func Test_AnalyzeIdSearch(t *testing.T) {
 	p := performance.Explain{}
-	p.GetDb("phpshardingpdo1", "./config.json")
+	p.Init("phpshardingpdo1", "./config.json")
 	entity, err := p.Analyze("SELECT * from article_1 where id = 4;")
 	assert.Equal(t, err == nil, true)
 	assert.Equal(t, entity != nil, true)
@@ -34,7 +34,7 @@ func Test_GetDb(t *testing.T) {
 
 func Test_explain(t *testing.T) {
 	p := performance.Explain{}
-	p.GetDb("phpshardingpdo1", "./config.json")
+	p.Init("phpshardingpdo1", "./config.json")
 	rows := p.SelectAll("show tables;")
 	defer rows.Close()
 	var table string

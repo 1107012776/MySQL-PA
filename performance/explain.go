@@ -67,6 +67,14 @@ func (obj *Explain) GetDb(name string, configPath string) *sql.DB {
 	return obj.Db
 }
 
+func (obj *Explain) Init(name string, configPath string) bool {
+	obj.GetDb(name, configPath)
+	if obj.Db == nil {
+		return false
+	}
+	return obj.Db.Ping() == nil
+}
+
 func (obj *Explain) SelectAll(sql string) *sql.Rows {
 	db := obj.Db
 	rows, err := db.Query(sql)
