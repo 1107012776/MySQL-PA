@@ -35,7 +35,7 @@ func (entity *ExplainEntity) ToJson() (string, error) {
 }
 
 func (obj *Explain) Analyze(sql string) (*ExplainEntity, error) {
-	rows := obj.SelectAll("explain " + sql)
+	rows, _ := obj.SelectAll("explain " + sql)
 	defer rows.Close()
 	var entity ExplainEntity
 	for rows.Next() {
@@ -75,12 +75,11 @@ func (obj *Explain) Init(name string, configPath string) bool {
 	return obj.Db.Ping() == nil
 }
 
-func (obj *Explain) SelectAll(sql string) *sql.Rows {
+func (obj *Explain) SelectAll(sql string) (*sql.Rows, error) {
 	db := obj.Db
 	rows, err := db.Query(sql)
 	if err != nil {
-		fmt.Println("查询出错了 %s", err)
-		return nil
+		return nil, err
 	}
-	return rows
+	return rows, nil
 }

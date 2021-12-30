@@ -35,7 +35,7 @@ func Test_GetDb(t *testing.T) {
 func Test_explain(t *testing.T) {
 	p := performance.Explain{}
 	p.Init("phpshardingpdo1", "./config.json")
-	rows := p.SelectAll("show tables;")
+	rows, _ := p.SelectAll("show tables;")
 	defer rows.Close()
 	var table string
 	for rows.Next() {
