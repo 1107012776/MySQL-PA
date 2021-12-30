@@ -34,7 +34,7 @@ func (entity *ExplainEntity) ToJson() (string, error) {
 	return string(jsonBytes), nil
 }
 
-func (obj *Explain) Analyze(sql string) (en *ExplainEntity, e error) {
+func (obj *Explain) Analyze(sql string) (*ExplainEntity, error) {
 	rows := obj.SelectAll("explain " + sql)
 	defer rows.Close()
 	var entity ExplainEntity
@@ -62,7 +62,7 @@ func (obj *Explain) Analyze(sql string) (en *ExplainEntity, e error) {
 	return nil, nil
 }
 
-func (obj *Explain) GetDb(name string, configPath string) (db *sql.DB) {
+func (obj *Explain) GetDb(name string, configPath string) *sql.DB {
 	obj.Db = GetDb(name, configPath)
 	return obj.Db
 }
