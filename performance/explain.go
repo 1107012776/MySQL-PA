@@ -2,6 +2,7 @@ package performance
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 )
 
@@ -24,9 +25,37 @@ type ExplainEntity struct {
 	Extra         string         `json:"Extra":`
 }
 
-func (obj *Explain) Analyze() (b bool) {
-	fmt.Println("analyze")
-	return true
+func (obj *Explain) Analyze(sql string) (en *ExplainEntity, s string, e error) {
+	rows := obj.SelectAll("explain " + sql)
+	defer rows.Close()
+	var entity ExplainEntity
+	for rows.Next() {
+		e := rows.Scan(
+			&entity.Id,
+			&entity.Select_type,
+			&entity.Table,
+			&entity.Partitions,
+			&entity.Type,
+			&entity.Possible_keys,
+			&entity.Key,
+			&entity.Key_len,
+			&entity.Ref,
+			&entity.Rows,
+			&entity.Filtered,
+			&entity.Extra,
+		)
+		if e != nil {
+			fmt.Println(e)
+			return nil, "", e
+		}
+		jsonBytes, err := json.Marshal(entity)
+		if err != nil {
+			fmt.Println(err)
+			return nil, "", err
+		}
+		return &entity, string(jsonBytes), nil
+	}
+	return nil, "", nil
 }
 
 func (obj *Explain) GetDb(name string, configPath string) (db *sql.DB) {

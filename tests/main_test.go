@@ -10,7 +10,9 @@ import (
 
 func Test_Analyze(t *testing.T) {
 	p := performance.Explain{}
-	assert.Equal(t, p.Analyze(), true)
+	p.GetDb("phpshardingpdo1", "./config.json")
+	_, _, err := p.Analyze("SELECT * from article_1 where article_title = '张三是某网络科技的呀';")
+	assert.Equal(t, err == nil, true)
 }
 
 func Test_GetDb(t *testing.T) {
