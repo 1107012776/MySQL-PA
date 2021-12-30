@@ -11,18 +11,18 @@ type Explain struct {
 }
 
 type ExplainEntity struct {
-	Id            string         `json:"id":`
-	Select_type   string         `json:"select_type":`
-	Table         string         `json:"table":`
+	Id            sql.NullString `json:"id":`
+	Select_type   sql.NullString `json:"select_type":`
+	Table         sql.NullString `json:"table":`
 	Partitions    sql.NullString `json:"partitions":`
-	Type          string         `json:"type":`
+	Type          sql.NullString `json:"type":`
 	Possible_keys sql.NullString `json:"possible_keys":`
 	Key           sql.NullString `json:"key":`
-	Key_len       sql.NullInt64  `json:"key_len":`
+	Key_len       sql.NullString `json:"key_len":`
 	Ref           sql.NullString `json:"ref":`
-	Rows          string         `json:"rows":`
-	Filtered      string         `json:"filtered":`
-	Extra         string         `json:"Extra":`
+	Rows          sql.NullString `json:"rows":`
+	Filtered      sql.NullString `json:"filtered":`
+	Extra         sql.NullString `json:"Extra":`
 }
 
 func (obj *Explain) Analyze(sql string) (en *ExplainEntity, s string, e error) {

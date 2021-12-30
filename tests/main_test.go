@@ -15,6 +15,15 @@ func Test_Analyze(t *testing.T) {
 	assert.Equal(t, err == nil, true)
 }
 
+func Test_Analyze1(t *testing.T) {
+	p := performance.Explain{}
+	p.GetDb("phpshardingpdo1", "./config.json")
+	entity, sJson, err := p.Analyze("SELECT * from article_1 where id = 4;")
+	assert.Equal(t, err == nil, true)
+	fmt.Println(sJson)
+	fmt.Println(entity.Select_type.String)
+}
+
 func Test_GetDb(t *testing.T) {
 	p := performance.Explain{}
 	db := p.GetDb("phpshardingpdo1", "./config.json")
