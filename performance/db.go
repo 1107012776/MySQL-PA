@@ -21,11 +21,11 @@ func GetDb(name string, configPath string) *sql.DB {
 
 //用json配置测试
 type Config struct {
-	Username string `json:"username:`
-	Password string `json:"password:`
-	Hostname string `json:"hostname:`
-	Port     string `json:"port:`
-	Charset  string `json:"charset:`
+	Username string `json:"username":`
+	Password string `json:"password":`
+	Hostname string `json:"hostname":`
+	Port     string `json:"port":`
+	Charset  string `json:"charset":`
 }
 
 func loadConfig(configPath string) *Config {
