@@ -1,4 +1,4 @@
-module MySQL-Performance-Analysis
+module  github.com/1107012776/MySQL-Performance-Analysis
 
 go 1.17
 
