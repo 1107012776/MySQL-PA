@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"MySQL-Performance-Analysis/performance"
 	"fmt"
+	"github.com/1107012776/MySQL-Performance-Analysis/performance"
 	assert "github.com/magiconair/properties/assert"
 	"testing"
 )
